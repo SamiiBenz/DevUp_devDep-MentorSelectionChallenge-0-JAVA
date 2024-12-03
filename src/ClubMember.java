@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 
 public class ClubMember {
 
-    // Defining Attributes -------------------------------------------
+    // Defining Attributes --------------------------------------------
     public int idPerson;
     public String name;
     public String midName;

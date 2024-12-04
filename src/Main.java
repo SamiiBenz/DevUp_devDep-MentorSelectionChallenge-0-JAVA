@@ -9,11 +9,76 @@ public class Main {
 
         ArrayList<ClubMember> existingMembers = new ArrayList<>();
         ArrayList<ClubDepartment> existingDepartments = new ArrayList<>();
+        int running = 1;
+
 
         System.out.println("\n[*] Managing Club Members");
-        System.out.print("[*] Choose your Action (b):\n" +
-                        "[1] Create a Member\n" +
-                        "[");
 
+        while(running == 1) {
+            System.out.print("\n[?] Which operation you want to use?:-----------------------------------------------\n\n" +
+                    "[1] Create a Member\n" +
+                    "[2] Create a Department\n" +
+                    "[3] View Members\n" +
+                    "[4] View Departments\n" +
+                    "[5] Update a Member\n" +
+                    "[6] Delete a Member\n" +
+                    "[7] Exit\n");
+            System.out.print("\n[-] Enter your action: ");
+            int x = input.nextInt();
+
+            switch (x) {
+                case 1:
+                    existingMembers.add(ClubMember.createMemeber());
+                    break;
+
+                case 2:
+                    existingDepartments.add(ClubDepartment.createDepartment(existingMembers));
+                    break;
+
+                case 3:
+                    for(ClubMember existingMember : existingMembers){
+                        existingMember.showInfo();
+                    }
+                    break;
+
+                case 4:
+                    for(ClubDepartment existingDepartment : existingDepartments){
+                        existingDepartment.showInfo();
+                    }
+                    break;
+
+                case 5:
+                    System.out.print("[-] Enter member ID to update it information: ");
+                    int id_update = input.nextInt();
+                    int found = 0;
+                    for(ClubMember existingMember : existingMembers){
+                        if(existingMember.idPerson == id_update){
+                            existingMember.updateInfo();
+                            found = 1;
+                            break;
+                        }
+                    }
+                    if(found == 0){System.out.println("\n[!] Couldn't find Member with entered ID!");}
+                    break;
+
+                case 6:
+                    System.out.print("\n[-] Enter member ID to delete it: ");
+                    int id_delete = input.nextInt();
+                    if(ClubMember.deleteMember(existingMembers, id_delete)==1){
+                        System.out.println("\n[+] Member has been deleted successfully!");
+                    }else{
+                        System.out.println("\n[!] Couldn't find Member with entered ID!");
+                    }
+                    break;
+
+                case 7:
+                    running = 0;
+                    break;
+
+                default:
+                    System.out.println("\n[!] No such operation!");
+                    break;
+            }
+        }
     }
 }

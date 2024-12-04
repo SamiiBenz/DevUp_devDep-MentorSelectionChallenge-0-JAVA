@@ -21,8 +21,10 @@ public class Main {
                     "[3] View Members\n" +
                     "[4] View Departments\n" +
                     "[5] Update a Member\n" +
-                    "[6] Delete a Member\n" +
-                    "[7] Exit\n");
+                    "[6] Update a Department\n" +
+                    "[7] Delete a Member\n" +
+                    "[8] Delete a Department\n" +
+                    "[9] Exit\n");
             System.out.print("\n[-] Enter your action: ");
             int x = input.nextInt();
 
@@ -62,6 +64,20 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.print("[-] Enter department ID to update it information: ");
+                    int id_department_update = input.nextInt();
+                    int found_it = 0;
+                    for(ClubDepartment existingDepartment : existingDepartments){
+                        if(existingDepartment.idClubDepartment == id_department_update){
+                            existingDepartment.updateInfo(existingMembers);
+                            found_it = 1;
+                            break;
+                        }
+                    }
+                    if(found_it == 0){System.out.println("\n[!] Couldn't find Member with entered ID!");}
+                    break;
+
+                case 7:
                     System.out.print("\n[-] Enter member ID to delete it: ");
                     int id_delete = input.nextInt();
                     if(ClubMember.deleteMember(existingMembers, id_delete)==1){
@@ -71,7 +87,17 @@ public class Main {
                     }
                     break;
 
-                case 7:
+                case 8:
+                    System.out.print("\n[-] Enter department ID to delete it: ");
+                    int id_department_delete = input.nextInt();
+                    if(ClubDepartment.deleteDepartment(existingDepartments, id_department_delete)==1){
+                        System.out.println("\n[+] Department has been deleted successfully!");
+                    }else{
+                        System.out.println("\n[!] Couldn't find Department with entered ID!");
+                    }
+                    break;
+
+                case 9:
                     running = 0;
                     break;
 

@@ -37,9 +37,6 @@ public class ClubDepartment {
         int id = input.nextInt();
         for(ClubMember member : members){
             if(member.idPerson == id){
-                if(member.firstJoinDate == null){
-                    member.firstJoinDate = LocalDateTime.now();
-                }
                 member.lastRejoinDate = LocalDateTime.now();
                 department.manager = member;
                 break;
@@ -55,9 +52,6 @@ public class ClubDepartment {
             int id_member = input.nextInt();
             for(ClubMember member : members){
                 if(member.idPerson == id_member){
-                    if(member.firstJoinDate == null){
-                        member.firstJoinDate = LocalDateTime.now();
-                    }
                     member.lastRejoinDate = LocalDateTime.now();
                     department.coManagers.add(member);
                     break;
@@ -71,6 +65,10 @@ public class ClubDepartment {
         System.out.print("[-] Enter department responsibility description: ");
         department.responsibilityDescription = input.nextLine();
 
+        for(ClubMember member : department.coManagers){
+            member.updateDepartment(department);
+        }
+        department.manager.updateDepartment(department);
 
         return department;
     }
@@ -85,6 +83,68 @@ public class ClubDepartment {
         }
 
         System.out.println("[-] Department responsibility description: " + this.responsibilityDescription);
+    }
+
+    public void updateInfo(ArrayList<ClubMember> members){
+        Scanner input = new Scanner(System.in);
+
+        for(ClubMember member : this.coManagers){
+            member.updateDepartment(null);
+        }
+        this.manager.updateDepartment(null);
+
+        System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value ");
+        System.out.print("[-] Enter department new ID (Obligation): ");
+        this.idClubDepartment = input.nextInt();
+        input.nextLine();
+        System.out.print("[-] Enter department new name: ");
+        this.departmentName = input.nextLine();
+        System.out.print("[-] Enter department new manager ID: ");
+        int id = input.nextInt();
+        for(ClubMember member : members){
+            if(member.idPerson == id){
+                member.lastRejoinDate = LocalDateTime.now();
+                this.manager = member;
+                break;
+            }
+        }if(this.manager == null){
+            System.out.println("\n[!] Couldn't find member with that id!\n[!] The manager will stays empty, you can fill it in the update department\n");
+        }
+
+        System.out.print("[-] Enter how much members you want to fill: ");
+        int x = input.nextInt();
+        for(int i=0;i<x;i++){
+            System.out.printf("[%d] Enter %d member ID: ", i+1, i+1);
+            int id_member = input.nextInt();
+            for(ClubMember member : members){
+                if(member.idPerson == id_member){
+                    member.lastRejoinDate = LocalDateTime.now();
+                    this.coManagers.add(member);
+                    break;
+                }
+            }
+        }if(this.coManagers.size() < x){
+            System.out.println("\n[!] Couldn't find some members!\n[!] You can try refill it in the update department\n");
+        }
+
+        input.nextLine();
+        System.out.print("[-] Enter department new responsibility description: ");
+        this.responsibilityDescription = input.nextLine();
+
+        for(ClubMember member : this.coManagers){
+            member.updateDepartment(this);
+        }
+        this.manager.updateDepartment(this);
+    }
+
+    public static int deleteDepartment(ArrayList<ClubDepartment> departments, int id){
+        for(int i=0;i<departments.size();i++){
+            if(departments.get(i).idClubDepartment == id){
+                departments.remove(i);
+                return 1;
+            }
+        }
+        return -1;
     }
 
 }

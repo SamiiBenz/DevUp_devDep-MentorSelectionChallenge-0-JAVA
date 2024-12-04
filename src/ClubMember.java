@@ -57,6 +57,7 @@ public class ClubMember {
         member.firstName = input.nextLine();
         System.out.print("[-] Enter member birthdate (YYYY-MM-DD): ");
         String BirthDate = input.nextLine(); if(!BirthDate.isEmpty()){member.birthDate = LocalDate.parse(BirthDate);}
+        member.firstJoinDate = LocalDateTime.now();
         System.out.print("[-] Enter member birth location: ");
         member.birthLocation = input.nextLine();
         System.out.print("[-] Enter member university: ");
@@ -82,7 +83,7 @@ public class ClubMember {
         System.out.println("[-] Member birth location: " + this.birthLocation);
         System.out.println("[-] Member first join date (YYYY-MM-DD): " + this.firstJoinDate);
         System.out.println("[-] Member last rejoin date (YYYY-MM-DD): " + this.lastRejoinDate);
-        System.out.println("[-] Member club department: " + this.clubDepartment);
+        System.out.println("[-] Member club department: " + this.clubDepartment.departmentName);
         System.out.println("[-] Member university: " + this.university);
         System.out.println("[-] Member speciality: " + this.speciality);
         System.out.println("[-] Member study level: " + this.studyLevel);
@@ -94,7 +95,7 @@ public class ClubMember {
     public void updateInfo(){
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the  value ");
+        System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value ");
         System.out.print("[-] Enter member new ID (Obligation): ");
         this.idPerson = input.nextInt();
         input.nextLine();
@@ -120,6 +121,10 @@ public class ClubMember {
         //member.profileImage = input.;
 
         System.out.print("\n[+] Member information has been updated successfully");
+    }
+
+    public void updateDepartment(ClubDepartment clubDepartment){
+        this.clubDepartment = clubDepartment;
     }
 
     public static int deleteMember(ArrayList<ClubMember> members, int id){

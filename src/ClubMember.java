@@ -83,7 +83,11 @@ public class ClubMember {
         System.out.println("[-] Member birth location: " + this.birthLocation);
         System.out.println("[-] Member first join date (YYYY-MM-DD): " + this.firstJoinDate);
         System.out.println("[-] Member last rejoin date (YYYY-MM-DD): " + this.lastRejoinDate);
-        System.out.println("[-] Member club department: " + this.clubDepartment.departmentName);
+        if(this.clubDepartment!=null){
+            System.out.println("[-] Member club department: " + this.clubDepartment.departmentName);
+        }else{
+            System.out.println("[-] Member club department: " + this.clubDepartment);
+        }
         System.out.println("[-] Member university: " + this.university);
         System.out.println("[-] Member speciality: " + this.speciality);
         System.out.println("[-] Member study level: " + this.studyLevel);
@@ -123,9 +127,6 @@ public class ClubMember {
         System.out.print("\n[+] Member information has been updated successfully");
     }
 
-    public void updateDepartment(ClubDepartment clubDepartment){
-        this.clubDepartment = clubDepartment;
-    }
 
     public static int deleteMember(ArrayList<ClubMember> members, int id){
         for(int i=0;i<members.size();i++){

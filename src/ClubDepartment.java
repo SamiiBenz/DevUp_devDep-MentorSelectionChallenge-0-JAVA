@@ -66,9 +66,9 @@ public class ClubDepartment {
         department.responsibilityDescription = input.nextLine();
 
         for(ClubMember member : department.coManagers){
-            member.updateDepartment(department);
+            member.clubDepartment = department;
         }
-        department.manager.updateDepartment(department);
+        department.manager.clubDepartment = department;
 
         return department;
     }
@@ -89,9 +89,14 @@ public class ClubDepartment {
         Scanner input = new Scanner(System.in);
 
         for(ClubMember member : this.coManagers){
-            member.updateDepartment(null);
+            member.clubDepartment = null;
+            if(member == this.manager){
+                member.clubDepartment = null;
+            }
         }
-        this.manager.updateDepartment(null);
+        this.coManagers.clear();
+        this.manager.clubDepartment = null;
+        this.manager = null;
 
         System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value ");
         System.out.print("[-] Enter department new ID (Obligation): ");
@@ -131,15 +136,23 @@ public class ClubDepartment {
         System.out.print("[-] Enter department new responsibility description: ");
         this.responsibilityDescription = input.nextLine();
 
+
         for(ClubMember member : this.coManagers){
-            member.updateDepartment(this);
+            member.clubDepartment = this;
         }
-        this.manager.updateDepartment(this);
+        this.manager.clubDepartment = this;
+
     }
 
     public static int deleteDepartment(ArrayList<ClubDepartment> departments, int id){
         for(int i=0;i<departments.size();i++){
             if(departments.get(i).idClubDepartment == id){
+                for(ClubMember member : departments.get(i).coManagers){
+                    member.clubDepartment = null;
+                    if(member == departments.get(i).manager){
+                        member.clubDepartment = null;
+                    }
+                }
                 departments.remove(i);
                 return 1;
             }

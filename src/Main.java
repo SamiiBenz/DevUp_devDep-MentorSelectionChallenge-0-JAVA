@@ -16,40 +16,40 @@ public class Main {
 
         while(running == 1) {
             System.out.print("\n[?] Which operation you want to use?:-----------------------------------------------\n\n" +
-                    "[1] Create a Member\n" +
-                    "[2] Create a Department\n" +
-                    "[3] View Members\n" +
-                    "[4] View Departments\n" +
-                    "[5] Update a Member\n" +
-                    "[6] Update a Department\n" +
-                    "[7] Delete a Member\n" +
-                    "[8] Delete a Department\n" +
-                    "[9] Exit\n");
+                    "[CM] Create a Member\n" +
+                    "[CD] Create a Department\n" +
+                    "[VM] View Members\n" +
+                    "[VD] View Departments\n" +
+                    "[UM] Update a Member\n" +
+                    "[UD] Update a Department\n" +
+                    "[DM] Delete a Member\n" +
+                    "[DD] Delete a Department\n" +
+                    "[E] Exit\n");
             System.out.print("\n[-] Enter your action: ");
-            int x = input.nextInt();
+            String x = input.next();
 
             switch (x) {
-                case 1:
+                case "CM":
                     existingMembers.add(ClubMember.createMemeber());
                     break;
 
-                case 2:
+                case "CD":
                     existingDepartments.add(ClubDepartment.createDepartment(existingMembers));
                     break;
 
-                case 3:
+                case "VM":
                     for(ClubMember existingMember : existingMembers){
                         existingMember.showInfo();
                     }
                     break;
 
-                case 4:
+                case "VD":
                     for(ClubDepartment existingDepartment : existingDepartments){
                         existingDepartment.showInfo();
                     }
                     break;
 
-                case 5:
+                case "UM":
                     System.out.print("[-] Enter member ID to update it information: ");
                     int id_update = input.nextInt();
                     int found = 0;
@@ -63,7 +63,7 @@ public class Main {
                     if(found == 0){System.out.println("\n[!] Couldn't find Member with entered ID!");}
                     break;
 
-                case 6:
+                case "UD":
                     System.out.print("[-] Enter department ID to update it information: ");
                     int id_department_update = input.nextInt();
                     int found_it = 0;
@@ -77,7 +77,7 @@ public class Main {
                     if(found_it == 0){System.out.println("\n[!] Couldn't find Member with entered ID!");}
                     break;
 
-                case 7:
+                case "DM":
                     System.out.print("\n[-] Enter member ID to delete it: ");
                     int id_delete = input.nextInt();
                     if(ClubMember.deleteMember(existingMembers, id_delete)==1){
@@ -87,7 +87,7 @@ public class Main {
                     }
                     break;
 
-                case 8:
+                case "DD":
                     System.out.print("\n[-] Enter department ID to delete it: ");
                     int id_department_delete = input.nextInt();
                     if(ClubDepartment.deleteDepartment(existingDepartments, id_department_delete)==1){
@@ -97,7 +97,7 @@ public class Main {
                     }
                     break;
 
-                case 9:
+                case "E":
                     running = 0;
                     break;
 

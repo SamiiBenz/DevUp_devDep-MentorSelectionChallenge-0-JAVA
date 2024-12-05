@@ -26,7 +26,7 @@ public class Main {
                     "[DD] Delete a Department\n" +
                     "[E] Exit\n");
             System.out.print("\n[-] Enter your action: ");
-            String x = input.next();
+            String x = input.next().toUpperCase();
 
             switch (x) {
                 case "CM":

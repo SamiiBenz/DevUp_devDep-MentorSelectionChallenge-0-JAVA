@@ -1,7 +1,5 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ClubDepartment {
@@ -34,6 +32,8 @@ public class ClubDepartment {
         System.out.print("[-] Enter department name: ");
         department.departmentName = input.nextLine();
         System.out.print("[-] Enter department manager ID: ");
+
+        // Here it will take the id and search in the members list, then it will change it information
         int id = input.nextInt();
         for(ClubMember member : members){
             if(member.idPerson == id){
@@ -46,6 +46,8 @@ public class ClubDepartment {
         }
 
         System.out.print("[-] Enter how much members you want to fill: ");
+
+        //Here it will ask the user for each id of the member who will join the club, if it didn't find that member it will show a message that some members wasn't found and that he can change it in the update function
         int x = input.nextInt();
         for(int i=0;i<x;i++){
             System.out.printf("[%d] Enter %d member ID: ", i+1, i+1);
@@ -65,6 +67,7 @@ public class ClubDepartment {
         System.out.print("[-] Enter department responsibility description: ");
         department.responsibilityDescription = input.nextLine();
 
+        // Here will also update the members information
         for(ClubMember member : department.coManagers){
             member.clubDepartment = department;
         }
@@ -73,6 +76,7 @@ public class ClubDepartment {
         return department;
     }
 
+    // Printing the department information -------------------------------------------------
     public void showInfo(){
         System.out.println("\n[-] Department ID: " + this.idClubDepartment);
         System.out.println("[-] Department name: " + this.departmentName);
@@ -85,14 +89,14 @@ public class ClubDepartment {
         System.out.println("[-] Department responsibility description: " + this.responsibilityDescription);
     }
 
+
+    // Updating information of the department ------------------------------------------------------------------------------
     public void updateInfo(ArrayList<ClubMember> members){
         Scanner input = new Scanner(System.in);
 
+        // Here it will clear the last information of the members and the manager and make it null
         for(ClubMember member : this.coManagers){
             member.clubDepartment = null;
-            if(member == this.manager){
-                member.clubDepartment = null;
-            }
         }
         this.coManagers.clear();
         this.manager.clubDepartment = null;
@@ -105,6 +109,8 @@ public class ClubDepartment {
         System.out.print("[-] Enter department new name: ");
         this.departmentName = input.nextLine();
         System.out.print("[-] Enter department new manager ID: ");
+
+        // Same as the create function ----------------------------------------------
         int id = input.nextInt();
         for(ClubMember member : members){
             if(member.idPerson == id){
@@ -144,10 +150,11 @@ public class ClubDepartment {
 
     }
 
+    // Deleting a department ------------------------------------------------------------------------
     public static int deleteDepartment(ArrayList<ClubDepartment> departments, int id){
         for(int i=0;i<departments.size();i++){
             if(departments.get(i).idClubDepartment == id){
-                for(ClubMember member : departments.get(i).coManagers){
+                for(ClubMember member : departments.get(i).coManagers){         // Here it will change the members information then the department will be deleted
                     member.clubDepartment = null;
                 }
                 departments.get(i).manager.clubDepartment = null;

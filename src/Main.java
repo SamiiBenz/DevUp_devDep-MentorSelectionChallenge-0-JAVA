@@ -4,16 +4,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // Defining a scanner var to take inputs from the user ------------------------
+        // Defining the important variables ------------------------
         Scanner input = new Scanner(System.in);
-
         ArrayList<ClubMember> existingMembers = new ArrayList<>();
         ArrayList<ClubDepartment> existingDepartments = new ArrayList<>();
         int running = 1;
 
 
-        System.out.println("\n[*] Managing Club Members");
+        System.out.println("\n[*] Managing Club Members");      // Just a regular print function
 
+
+        // The program will keep running as long as running = 1
         while(running == 1) {
             System.out.print("\n[?] Which operation you want to use?:-----------------------------------------------\n\n" +
                     "[CM] Create a Member\n" +
@@ -53,7 +54,7 @@ public class Main {
                     System.out.print("[-] Enter member ID to update it information: ");
                     int id_update = input.nextInt();
                     int found = 0;
-                    for(ClubMember existingMember : existingMembers){
+                    for(ClubMember existingMember : existingMembers){       // The program will search of the member and update it information
                         if(existingMember.idPerson == id_update){
                             existingMember.updateInfo();
                             found = 1;
@@ -67,7 +68,7 @@ public class Main {
                     System.out.print("[-] Enter department ID to update it information: ");
                     int id_department_update = input.nextInt();
                     int found_it = 0;
-                    for(ClubDepartment existingDepartment : existingDepartments){
+                    for(ClubDepartment existingDepartment : existingDepartments){           // The program will search of the department and update it information
                         if(existingDepartment.idClubDepartment == id_department_update){
                             existingDepartment.updateInfo(existingMembers);
                             found_it = 1;

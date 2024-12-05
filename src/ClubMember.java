@@ -24,7 +24,7 @@ public class ClubMember {
 
     // Making the constructor with default values -----------------------------------------------
     public ClubMember(){
-        this.idPerson = -1;
+        this.idPerson = -1;         // default values of each attribute
         this.name = "";
         this.midName = "";
         this.firstName ="";
@@ -41,9 +41,10 @@ public class ClubMember {
     }
 
 
+    // Create the member function ------------------------------------------------
     public static ClubMember createMemeber(){
-        Scanner input = new Scanner(System.in);
-        ClubMember member = new ClubMember();
+        Scanner input = new Scanner(System.in);         // defining scanner to take inputs from the user
+        ClubMember member = new ClubMember();           // defining the member and fill it information then return it
 
         System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value ");
         System.out.print("[-] Enter member ID (Obligation): ");
@@ -56,8 +57,14 @@ public class ClubMember {
         System.out.print("[-] Enter member first name: ");
         member.firstName = input.nextLine();
         System.out.print("[-] Enter member birthdate (YYYY-MM-DD): ");
-        String BirthDate = input.nextLine(); if(!BirthDate.isEmpty()){member.birthDate = LocalDate.parse(BirthDate);}
-        member.firstJoinDate = LocalDateTime.now();
+
+        // Here I made it so if the user didn't fill the answer it will keep null
+        String BirthDate = input.nextLine();
+        if(!BirthDate.isEmpty()){
+            member.birthDate = LocalDate.parse(BirthDate);
+        }
+
+        member.firstJoinDate = LocalDateTime.now();             // This will take the join time (now) and store it
         System.out.print("[-] Enter member birth location: ");
         member.birthLocation = input.nextLine();
         System.out.print("[-] Enter member university: ");
@@ -74,6 +81,7 @@ public class ClubMember {
         return member;
     }
 
+    // Print member information function --------------------------------------------------------------
     public void showInfo(){
         System.out.println("\n[-] Member ID: " + this.idPerson);
         System.out.println("[-] Member last name: " + this.name);
@@ -83,11 +91,14 @@ public class ClubMember {
         System.out.println("[-] Member birth location: " + this.birthLocation);
         System.out.println("[-] Member first join date (YYYY-MM-DD): " + this.firstJoinDate);
         System.out.println("[-] Member last rejoin date (YYYY-MM-DD): " + this.lastRejoinDate);
+
+        // Here it will show null if the member is not in a club, and it will show the club name if he is in a club
         if(this.clubDepartment!=null){
             System.out.println("[-] Member club department: " + this.clubDepartment.departmentName);
         }else{
             System.out.println("[-] Member club department: " + this.clubDepartment);
         }
+
         System.out.println("[-] Member university: " + this.university);
         System.out.println("[-] Member speciality: " + this.speciality);
         System.out.println("[-] Member study level: " + this.studyLevel);
@@ -96,6 +107,8 @@ public class ClubMember {
         //member.profileImage = input.;
     }
 
+
+    // Updating the member information ------------------------------------------------------------------------
     public void updateInfo(){
         Scanner input = new Scanner(System.in);
 
@@ -104,11 +117,11 @@ public class ClubMember {
         this.idPerson = input.nextInt();
         input.nextLine();
         System.out.print("[-] Enter member new last name: ");
-        String Name = input.nextLine(); if(!Name.isEmpty()){this.name = Name;}
+        String Name = input.nextLine(); if(!Name.isEmpty()){this.name = Name;}                              // if the user didn't fill it, it won't change
         System.out.print("[-] Enter member new middle name: ");
-        String MidName = input.nextLine(); if(!MidName.isEmpty()){this.midName = MidName;}
+        String MidName = input.nextLine(); if(!MidName.isEmpty()){this.midName = MidName;}                  // same here
         System.out.print("[-] Enter member new first name: ");
-        String FirstName = input.nextLine(); if(!FirstName.isEmpty()){this.firstName = FirstName;}
+        String FirstName = input.nextLine(); if(!FirstName.isEmpty()){this.firstName = FirstName;}          // same here....
         System.out.print("[-] Enter member new birthdate (YYYY-MM-DD): ");
         String BirthDate = input.nextLine(); if(!BirthDate.isEmpty()){this.birthDate = LocalDate.parse(BirthDate);}
         System.out.print("[-] Enter member new birth location: ");
@@ -128,6 +141,7 @@ public class ClubMember {
     }
 
 
+    // Delete member function -----------------------------------------------------------------------------
     public static int deleteMember(ArrayList<ClubMember> members, int id){
         for(int i=0;i<members.size();i++){
             if(members.get(i).idPerson == id){

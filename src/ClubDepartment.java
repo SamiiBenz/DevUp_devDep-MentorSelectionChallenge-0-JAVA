@@ -149,10 +149,8 @@ public class ClubDepartment {
             if(departments.get(i).idClubDepartment == id){
                 for(ClubMember member : departments.get(i).coManagers){
                     member.clubDepartment = null;
-                    if(member == departments.get(i).manager){
-                        member.clubDepartment = null;
-                    }
                 }
+                departments.get(i).manager.clubDepartment = null;
                 departments.remove(i);
                 return 1;
             }

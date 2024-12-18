@@ -1,9 +1,22 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
+
+/* General notes ::
+-   comments are used to explain what is done not how things are done (don't over use it)
+-   always try to avoid using empty constrictor (it'll let u in position where you should use a lot of setters
+-   generally when we have list of objects of the same type and we need to keep track of everything related to them ... we generally add another static field
+*/
+
 public class ClubMember {
+
+    // example of how it should be done
+    // public static final List<ClubDepartment> members = new LinkedList<>(); (all the calls of adding updating removing should be done on this list)
+
 
     // Defining Attributes --------------------------------------------
     public int idPerson;
@@ -42,12 +55,13 @@ public class ClubMember {
 
 
     // Create the member function ------------------------------------------------
-    public static ClubMember createMemeber(){
+    public static ClubMember createMemeber(){ //only the constrictor who should be creating objects
+
         Scanner input = new Scanner(System.in);         // defining scanner to take inputs from the user
         ClubMember member = new ClubMember();           // defining the member and fill it information then return it
 
-        System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value ");
-        System.out.print("[-] Enter member ID (Obligation): ");
+        System.out.println("\n[*] Note: keep in mind that you can keep it empty and it will take the default value "); // no it shouldn't be like that .. the default values are useless the user should be forced to input all data
+        System.out.print("[-] Enter member ID (Obligation): "); // you aren't handling the obligation part
         member.idPerson = input.nextInt();
         input.nextLine();
         System.out.print("[-] Enter member last name: ");
@@ -64,7 +78,7 @@ public class ClubMember {
             member.birthDate = LocalDate.parse(BirthDate);
         }
 
-        member.firstJoinDate = LocalDateTime.now();             // This will take the join time (now) and store it
+        member.firstJoinDate = LocalDateTime.now();             // This will take the join time (now) and store it (it will be better to use it directly in the constrictor)
         System.out.print("[-] Enter member birth location: ");
         member.birthLocation = input.nextLine();
         System.out.print("[-] Enter member university: ");
@@ -142,7 +156,7 @@ public class ClubMember {
 
 
     // Delete member function -----------------------------------------------------------------------------
-    public static int deleteMember(ArrayList<ClubMember> members, int id){
+    public static int deleteMember(ArrayList<ClubMember> members, int id){ //it should be deleting from the static list (i added as comment)
         for(int i=0;i<members.size();i++){
             if(members.get(i).idPerson == id){
                 members.remove(i);

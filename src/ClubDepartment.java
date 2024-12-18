@@ -83,7 +83,7 @@ public class ClubDepartment {
         System.out.println("[-] Department manager name and ID: " + this.manager.name + " " + this.manager.midName + " " + this.manager.firstName + " | ID: " + this.manager.idPerson);
         System.out.printf("[-] %d Members associated with that department:\n", this.coManagers.size());
         for(ClubMember member : this.coManagers){
-            System.out.printf("[*] Member name: %s %s %s | ID: %d\n", member.name, member.midName, member.firstName, member.idPerson);
+            System.out.printf("[*] Member name: %s %s %s | ID: %d\n", member.name, member.midName, member.firstName, member.idPerson); // nice job
         }
 
         System.out.println("[-] Department responsibility description: " + this.responsibilityDescription);
@@ -159,7 +159,7 @@ public class ClubDepartment {
                 }
                 departments.get(i).manager.clubDepartment = null;
                 departments.remove(i);
-                return 1;
+                return 1; // return 0 in the success case not 1 (convention)
             }
         }
         return -1;

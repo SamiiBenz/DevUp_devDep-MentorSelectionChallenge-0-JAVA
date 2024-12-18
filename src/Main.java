@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/* General notes :
+- use functions (methods) when ever it's possible (clean code principle)
+* */
 public class Main {
     public static void main(String[] args) {
 
@@ -27,7 +30,7 @@ public class Main {
                     "[DD] Delete a Department\n" +
                     "[E] Exit\n");
             System.out.print("\n[-] Enter your action: ");
-            String x = input.next().toUpperCase();
+            String x = input.next().toUpperCase();// well done !!
 
             switch (x) {
                 case "CM":
